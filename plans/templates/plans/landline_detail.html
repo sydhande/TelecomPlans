@@ -1,0 +1,23 @@
+{% extends "plans/base.html" %}
+{% block content %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2">PlanName :{{ object.planname }}</a>
+            <small class="text-muted"> Posted on {{ object.dateposted|date:"F d, Y" }} by {{ object.author}}</small>
+            {% if object.author == user %}
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'landline-update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'landline-delete' object.id %}">Delete</a> 
+                </div>
+            {% endif %}
+        </div>
+        <h2 class="article-title">{{ object.planname }} </h2>
+        <p class="article-content">Applicability : {{ object.applicability }}</p>
+        <p class="article-content">FMC : {{ object.fmc }}</p>
+        <p class="article-content">TalkValue :{{ object.talkvalue }}</p>
+        <p class="article-content">CallCharges :{{ object.callcharges }}</p>
+        <p class="article-content">Remark : {{ object.remark }}</p>
+    </div>
+</article>
+{% endblock content%}

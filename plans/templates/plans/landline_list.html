@@ -1,0 +1,22 @@
+{% extends 'plans/base.html' %}
+
+{% block content %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+{% for ll in filter.qs %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{% url 'landline-detail' ll.id %}"> {{ ll.planname }}</a>
+        <small class="text-muted">{{ ll.applicability }} , FMC : {{ ll.fmc }}</small>
+      </div>
+      <h3> <a class="article-title" href="{% url 'landline-detail' ll.id %}"> {{ ll.planname }} </a> </h3>
+      <!-- <p> {{ ll.fmc }} </p>
+            <p> {{ ll.talkvalue }} </p>
+            <p> {{ ll.callcharges }} </p> -->
+    </div>
+  </article>
+{% endfor %}
+{% endblock %}

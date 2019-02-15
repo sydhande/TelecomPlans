@@ -1,0 +1,43 @@
+{% extends "plans/base.html" %}
+{% block content %}
+{% load widget_tweaks %}
+<form method="get">
+    <div class="well">
+        <div class="row">
+            <div class="form-group col-sm-4 col-md-3">
+                {{ filter.form.planname.label_tag }}
+                {% render_field filter.form.planname class="form-control" %}
+            </div>
+            <div class="form-group col-sm-4 col-md-3">
+                {{ filter.form.speed.label_tag }}
+                {% render_field filter.form.speed class="form-control" %}
+            </div>
+            <div class="form-group col-sm-4 col-md-3">
+                {{ filter.form.fmc.label_tag }}
+                {% render_field filter.form.fmc class="form-control" %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <span class=" Search"></span> Search
+        </button>
+    </div>
+</form>
+<hr>
+{% for ll in  filter.qs %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <h5><a class="mr-2" href="{% url 'broadband-detail' ll.id %}"> {{ ll.planname }}</a> </h5>
+            <small class="text-muted">{{ ll.speed }} , FMC : {{ ll.fmc }}</small>
+        </div>
+        <div>
+            <!-- <h6> <a class="article-title" href="{% url 'landline-detail' ll.id %}"> {{ ll.planname }} </a> </h6> -->
+            <small class="text-muted">{{ ll.freedata }} : {{ ll.callcharges }}</small>
+        </div>
+        <!-- <p> {{ ll.fmc }} </p>
+            <p> {{ ll.talkvalue }} </p>
+            <p> {{ ll.callcharges }} </p> -->
+    </div>
+</article>
+{% endfor %}
+{% endblock content %}
